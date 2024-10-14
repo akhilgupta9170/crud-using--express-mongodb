@@ -8,6 +8,13 @@
     route.get('/fetch', fetch)
 
     route.put("/update/:id", update);
-    route.delete("/delete", deleteUser);
+    route.delete("/delete/:id", deleteUser);
     export default route;
 
+// /v1/todos
+// GET 
+// POST
+// /v1/todos/:id
+    // GET
+    // PUT
+    // DELETE

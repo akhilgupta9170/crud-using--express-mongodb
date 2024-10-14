@@ -1,20 +1,26 @@
 import User from "../model/userModel.js";
 
-export const create = async(req,res) =>{
-    try{
+export const create = async (req, res) => {
+    try {
         const userData = new User(req.body);
-        const {email} = userData;
-        const userExist = await User.findOne({email})
-        if(userExist){
-            return res.status(400).json({message: "User already exists"})
-        }
-        const savesUser = await User.save();
-    }
-    catch (err) {
-        res.status(500).json({err:"inter server error"})
-    }
+        
+        const { email } = userData;
+        const userExist = await User.findOne({ email });
 
-}
+        if (userExist) {
+            return res.status(400).json({ message: "User already exists" });
+        }
+
+        const savedUser = await userData.save();
+        console.log(savedUser.email); // Log the email of the saved user
+
+        return res.status(201).json(savedUser); // Return 201 Created status
+    } catch (err) {
+        console.error(err); // Log the error for debugging
+        res.status(500).json({ error: "Internal server error" });
+    }
+};
+
 
 export const  fetch = async (req,res) =>{
     try{

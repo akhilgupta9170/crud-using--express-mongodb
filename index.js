@@ -17,12 +17,14 @@ console.log("MongoDB Connection URL:", MONGOURL); // Log the connection string
 mongoose.connect(MONGOURL)
     .then(() => {
         console.log("Database connection established");
-        app.listen(PORT, () => {
-            console.log(`Server is running on port ${PORT}`);
-        });
+       
     })
     .catch(err => {
         console.error("Error connecting to database:", err); 
     });
 
-app.route("/api/user",route) 
+app.use("/api/user",route) 
+
+app.listen(PORT, () => {
+    console.log(`Server is running on port ${PORT}`);
+});
